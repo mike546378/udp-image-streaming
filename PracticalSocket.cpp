@@ -349,6 +349,14 @@ int UDPSocket::recvFrom(void *buffer, int bufferLen, string &sourceAddress,
   return rtn;
 }
 
+void UDPSocket::setRecvTimeout(int timeout)
+{
+    struct timeval tv;
+    tv.tv_sec = timeout;  /* 30 Secs Timeout */
+    setsockopt(sockDesc, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+}
+
+
 void UDPSocket::setMulticastTTL(unsigned char multicastTTL) throw(SocketException) {
   if (setsockopt(sockDesc, IPPROTO_IP, IP_MULTICAST_TTL, 
                  (raw_type *) &multicastTTL, sizeof(multicastTTL)) < 0) {

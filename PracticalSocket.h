@@ -335,6 +335,12 @@ public:
    */
   void leaveGroup(const string &multicastGroup) throw(SocketException);
 
+  /**
+   * Sets timeout for receiving on socket
+   * @param timeout
+   */
+  void setRecvTimeout(int timeout);
+  
 private:
   void setBroadcast();
 };
